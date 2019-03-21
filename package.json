@@ -1,0 +1,37 @@
+{
+    "name": "anydoor",
+    "version": "1.0.0",
+    "description": "My first NodeJs Static Web server",
+    "main": ".eslintrc.js",
+    "dependencies": {
+        "handlebars": "^4.1.1"
+    },
+    "devDependencies": {
+        "babel-eslint": "^10.0.1",
+        "chalk": "^2.4.2",
+        "eslint": "^5.15.3",
+        "eslint-config-airbnb-base": "^13.1.0",
+        "eslint-plugin-import": "^2.16.0",
+        "eslint-plugin-vue": "^5.2.2",
+        "pre-commit": "^1.2.2"
+    },
+    "pre-commit": [
+        "fix",
+        "lint"
+    ],
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "lint": "eslint .",
+        "fix": "eslint --fix ."
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/lhban108/anydoor.git"
+    },
+    "author": "lhban108",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/lhban108/anydoor/issues"
+    },
+    "homepage": "https://github.com/lhban108/anydoor#readme"
+}

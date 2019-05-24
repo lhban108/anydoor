@@ -1,0 +1,246 @@
+// 1、用字符串模板调用方法
+// function test(template, name, age) {
+//   console.log(template)
+//   console.log(name)
+//   console.log(age)
+// }
+
+
+
+// 2.参数类型
+let myName: string  = 'wu' // 定义变量时给变量定义类型 String类型
+let myName2: any  = 'san' // 任意类型
+let age: number = 12 // number => 数字类型
+let man: boolean = true // boolean => 布尔值
+function test2(): void { // void => 该函数不能有任何返回值
+  // ...
+}
+
+// 在参数名称后面使用冒号来指定参数的类型
+// 给函数的参数申明类型，调用的时候必须按照该类型传参
+function test3(name: string, age: number): string { 
+  return `my name is ${name}, and my age is ${age}`
+}
+test3('li', 12)
+
+// 自定义类型 Person
+class Person {
+  name: string
+  age: number
+  constructor() {
+    this.name = name
+    this.age = age
+  }
+}
+let zhang: Person = new Person()
+zhang.name = 'zhang1'
+zhang.age = 15
+
+
+// 3. 参数默认值
+// 在参数声明后面用等号来指定参数的默认值
+function test4 (a: string, b: number, c: string='Jojo') :string {
+  return a + b + c
+}
+// 当调用test4时，可以传2个参数，也可以传3个参数
+// 因为函数test4的第三个参数申明了默认值Jojo 
+test4('Leo', 16)
+test4('Alan', 30, 'Code')
+// 注意:有默认值的参数,必须写在没有默认值参数的后面
+
+
+// 4. 可选参数
+// 在方法的参数声明后面用问号来标明此参数为可选参数
+function test5 (a: string, b?: number, c: string='Jojo') :string {
+  return a + b + c
+}
+// 调用时可以不必传第二个参数,因为函数声明时,b是可选参数
+test5('Leo')
+test5('Leo', 18)
+test5('Alan', 31, 'Code')
+// 注意:可选参数必须写在必传参数的后面
+
+
+// 5. Rest and Spread 操作符
+// 用来声明任意数量的方法参数
+function test6(...args: number[]): void {
+  args.forEach(arg => {
+    console.log(arg)
+  })
+}
+test6(1, 2)
+test6(1, 2, 4, 7)
+
+
+// 6.generotor函数
+// 控制函数的执行过程, 手工暂停和恢复代码执行
+function* test7(): any {
+  console.log('start')
+  yield
+
+  console.log('continue')
+  yield
+
+  console.log('end')
+}
+const genFun1 = test7()
+genFun1.next() // start
+genFun1.next() // continue
+genFun1.next() // end
+
+
+// 7.析构表达数
+// 通过表达式将对象或数组拆解成任意数量的变量
+function test8 () {
+  return {
+    code: 'IBM',
+    price: 200
+  }
+}
+let {code, price} = test8()
+let {code: code1, price: price1} = test8() // 重命名
+
+function test9 () {
+  return {
+    code2: 'IBM',
+    price2: {
+      price3: 100,
+      price4: 300
+    }
+  }
+}
+let {code2, price2: {price4}} = test9() // 取了 code2和 price4 2个值
+
+let arr1 = [1, 2, 3]
+let [num1, num2] = arr1 // num1 = 1, num2 = 2
+let [num3, , num4] = arr1 // num3 = 1, num4 = 3
+
+
+// 8. for...in  for...of
+// for..in 遍历的是对象的key,不能被break打断
+// for..of 遍历的是对象的value,可以用break 打断循环
+
+
+// 9.类 class
+class Person1 {
+  // 有3种方式修饰: 
+  // public(默认,外部可访问) private(私有,只有内部可访问) protected(受保护的,只有内部或子类可访问)
+  public name: string 
+  constructor (name:string) {
+    this.name = name
+  }
+  eat () {
+    console.log(this.name)
+  }
+}
+
+let p1 = new Person1('batman')
+p1.eat()
+
+// 简写
+class Person2 {
+  constructor (public name: string) {
+    // 参数上加了public的修饰符,就等于在外面声明name,并且this.name=name
+  }
+  eat () {
+    console.log(this.name)
+  }
+}
+
+
+// 10.继承 extends
+class Person3 {
+  name: string
+  constructor (name: string) {
+    this.name = name
+  }
+  eat () {
+    console.log('I am eatting')
+  }
+}
+
+class Employee extends Person3{
+  code: string
+  constructor (code: string, name: string) {
+    super(name)
+    this.code = code
+  }
+  work () {
+    console.log('I am working')
+  }
+}
+let p2 = new Person3('P2')
+p2.eat()
+let e1 = new Employee('e1', '001')
+e1.eat()
+e1.work()
+
+
+// 11 泛型
+// 参数化的类型,一般用来限制集合的内容
+let arr2:Array<Person3> = []
+arr2[0] = new Person3('zhangsan')
+arr2[1] = new Employee('lisi', '002')
+// 泛型规定arr2数组只能放Person3类型的数据,或者Person3 的子类型数据
+
+
+// 12 接口 interface
+// 接口是用来建立某种代码约定,使得其他开发者在调用某个方法或者创建新的类时,
+// 必须遵守接口所定义的代码约定
+// 关键字 interface 声明一个接口
+// 关键字 implements 实现接口
+interface IPerson4 {
+  name: string
+  age: number
+}
+// 这是接口的第一种使用方式,在类的构造函数中使用接口定义的变量
+class child {
+  constructor (public config: IPerson4) {
+
+  }
+}
+let child1 = new child({
+  name: 'zhangsan',
+  age: 18
+})
+
+interface Animal {
+  eat(): void
+}
+// 接口的第二种使用方式, implements用类实现接口
+// 实现接口的类,必须重写接口中定义的方法
+class Sheep implements Animal {
+  eat () {
+    console.log('I eat grass')
+  }
+}
+class Tiger implements Animal {
+  eat () {
+    console.log('I eat meat')
+  }
+}
+let sheep1 = new Sheep()
+let tiger1 = new Tiger()
+
+
+
+// 13 模块 Module
+// 模块可以帮助开发者将代码分割为可重用的单元。
+// 开发者可以自己决定将模块中的哪些资源(类、方法、变量)暴露出去供外部使用,
+// 哪些资源只在模块内使用
+// 一个文件就是一个模块,在模块内部用import(引用资源) export(暴露的资源)
+
+
+// 14 注解 annotation
+// 注解为程序的元素(类、方法、变量)加上更直观、更明了的说明,这些说明信息
+// 与程序的业务逻辑无关,而是供指定的工具或框架使用
+
+
+// 15 类型定义文件 ( *.d.ts )
+// 类型定义文件用来帮助开发者在TypeScript中使用已有的JavaScript的工具包
+// 如 JQuery文件：  jquery.d.ts
+// 安装方法: 
+// 安装typings cli实用程序 => npm install typings --global
+// 查找 => typings search tape
+// 按名称查找 => typings search --name react
+// 或者通过typingsrc defaultsource 配置

@@ -4,7 +4,7 @@
     "description": "My first NodeJs Static Web server",
     "main": ".eslintrc.js",
     "dependencies": {
-        "handlebars": "^4.1.1"
+        "handlebars": "^4.4.5"
     },
     "devDependencies": {
         "babel-eslint": "^10.0.1",
